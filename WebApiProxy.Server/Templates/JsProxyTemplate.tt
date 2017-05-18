@@ -53,10 +53,11 @@
 				if (typeof(webApiAuthToken) != "undefined" && webApiAuthToken.length > 0)
 					xhr.setRequestHeader("Authorization", "Bearer " + webApiAuthToken);
 			},
+			contentType:"application/json",
 		});
 
 		if (body) {
-			ajaxOptions.data = body;
+			ajaxOptions.data = JSON.stringify(body);
 		}
 
 		if (this.antiForgeryToken) {
