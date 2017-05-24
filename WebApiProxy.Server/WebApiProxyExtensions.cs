@@ -11,11 +11,24 @@ namespace WebApiProxy.Server
         public static void RegisterProxyRoutes(this HttpConfiguration config, string routeTemplate = "api/proxies")
         {
             config.Routes.MapHttpRoute(
-            name: "WebApiProxy",
-            routeTemplate: routeTemplate,
-            defaults: new { id = RouteParameter.Optional },
-            constraints: null,
-            handler: new ProxyHandler(config) { InnerHandler = new HttpControllerDispatcher(config) });
+                name: "WebApiProxy",
+                routeTemplate: routeTemplate,
+                defaults: new { id = RouteParameter.Optional },
+                constraints: null,
+                handler: new ProxyHandler(config) { InnerHandler = new HttpControllerDispatcher(config) }
+            );
+
+            //register .js url
+            if (!routeTemplate.EndsWith(".js"))
+            {
+                config.Routes.MapHttpRoute(
+                    name: "WebApiProxy.js",
+                    routeTemplate: routeTemplate + ".js",
+                    defaults: new { id = RouteParameter.Optional },
+                    constraints: null,
+                    handler: new ProxyHandler(config) { InnerHandler = new HttpControllerDispatcher(config) }
+                );
+            }
         }
     }
 }
