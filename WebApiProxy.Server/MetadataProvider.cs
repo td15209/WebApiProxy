@@ -17,9 +17,10 @@ namespace WebApiProxy.Server
         private readonly List<string> typesToIgnore = new List<string>();
         private readonly HttpConfiguration config;
 
+
         public MetadataProvider(HttpConfiguration config)
         {
-            
+
             this.models = new List<ModelDefinition>();
             this.typesToIgnore = new List<string>();
             this.config = config;
@@ -28,7 +29,8 @@ namespace WebApiProxy.Server
         public Metadata GetMetadata(HttpRequestMessage request)
         {
             var host = request.RequestUri.Scheme + "://" + request.RequestUri.Authority + request.GetRequestContext().VirtualPathRoot;
-            var descriptions = config.Services.GetApiExplorer().ApiDescriptions;
+            var filter = WebApiProxyExtensions.Filter;
+            var descriptions = config.Services.GetApiExplorer().ApiDescriptions.Where(x => filter == null || !filter.Filter(x)).ToArray();//应用过滤器
             var documentationProvider = config.Services.GetDocumentationProvider();
 
             ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = descriptions
@@ -45,12 +47,12 @@ namespace WebApiProxy.Server
                               {
                                   Name = d.Key.ControllerName,
                                   Description = documentationProvider == null ? "" : documentationProvider.GetDocumentation(d.Key) ?? "",
-                                  ActionMethods = from a in descriptions
+                                  ActionMethods = from a in d.Distinct(new ApiDescriptionComparer())
                                                   where !a.ActionDescriptor.ControllerDescriptor.ControllerType.IsExcluded()
                                                   && !a.ActionDescriptor.IsExcluded()
                                                   && !a.RelativePath.Contains("Swagger")
                                                   && !a.RelativePath.Contains("docs")
-                                                  && a.ActionDescriptor.ControllerDescriptor.ControllerName == d.Key.ControllerName
+                                                  //&& a.ActionDescriptor.ControllerDescriptor.ControllerName == d.Key.ControllerName
                                                   select new ActionMethodDefinition
                                                   {
                                                       Name = a.ActionDescriptor.ActionName,
@@ -80,8 +82,8 @@ namespace WebApiProxy.Server
                                                   }
                               },
                 Models = models,
-				Host = (null != host && host.Length > 0 && host[host.Length - 1] != '/') ? string.Concat(host, "/") : host
-			};
+                Host = (null != host && host.Length > 0 && host[host.Length - 1] != '/') ? string.Concat(host, "/") : host
+            };
 
             metadata.Definitions = metadata.Definitions.Distinct().OrderBy(d => d.Name);
             metadata.Models = metadata.Models.Distinct(new ModelDefinitionEqualityComparer()).OrderBy(d => d.Name);
@@ -225,14 +227,14 @@ namespace WebApiProxy.Server
                 var properties = classToDef.IsGenericType
                                      ? classToDef.GetGenericTypeDefinition().GetProperties()
                                      : classToDef.GetProperties();
-            
+
                 model.Properties = from property in properties
                                    select new ModelProperty
-                                          {
-                                              Name = property.Name,
-                                              Type = ParseType(property.PropertyType, model),
-                                              Description = GetDescription(property)
-                                          };
+                                   {
+                                       Name = property.Name,
+                                       Type = ParseType(property.PropertyType, model),
+                                       Description = GetDescription(property)
+                                   };
                 AddTypeToIgnore(model.Name);
                 foreach (var p in properties)
                 {

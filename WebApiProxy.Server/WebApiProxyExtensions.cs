@@ -5,6 +5,9 @@ namespace WebApiProxy.Server
 {
     public static class WebApiProxyExtensions
     {
+        //todo:简单处理,考虑重新设计
+        internal static IApiFilter Filter;
+
         /// <summary>
         /// Sets up the proxy route table entries.
         /// </summary>
@@ -29,6 +32,12 @@ namespace WebApiProxy.Server
                     handler: new ProxyHandler(config) { InnerHandler = new HttpControllerDispatcher(config) }
                 );
             }
+        }
+
+        public static HttpConfiguration RegisterFilter(this HttpConfiguration config, IApiFilter filter)
+        {
+            Filter = filter;
+            return config;
         }
     }
 }
