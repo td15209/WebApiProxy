@@ -18,7 +18,7 @@ namespace WebApiProxy.Server.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+    #line 1 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class JsProxyTemplate : JsProxyTemplateBase
     {
@@ -31,7 +31,7 @@ namespace WebApiProxy.Server.Templates
             this.Write("\r\n(function($) {\r\n\t\"use strict\";\r\n\r\n\tif (!$) {\r\n\t\tthrow \"jQuery is required\";\r\n\t}" +
                     "\r\n\r\n\t$.proxies = $.proxies || { \r\n\t\tbaseUrl: \"");
             
-            #line 15 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 15 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Metadata.Host));
             
             #line default
@@ -60,14 +60,14 @@ namespace WebApiProxy.Server.Templates
                     "rl){\r\n\t\tif(!endsWith(url, \'/\')){\r\n\t\t\treturn url + \'/\';\r\n\t\t}\r\n\t\t\r\n\t\treturn url;\r\n" +
                     "\t}\r\n\r\n\t/* Proxies */\r\n\r\n\t");
             
-            #line 91 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 91 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  foreach(var definition in this.Metadata.Definitions) { 
             
             #line default
             #line hidden
             this.Write("\t$.proxies.");
             
-            #line 92 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 92 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(definition.Name.ToLower()));
             
             #line default
@@ -75,14 +75,14 @@ namespace WebApiProxy.Server.Templates
             this.Write(" = {\r\n\t\tdefaultOptions: {},\r\n\t\tantiForgeryToken: defaultAntiForgeryTokenAccessor," +
                     "\r\n");
             
-            #line 95 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 95 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  foreach(var method in definition.ActionMethods) { 
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 97 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 97 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
 
 	var allParameters = method.UrlParameters.AsEnumerable();
 	
@@ -104,14 +104,14 @@ namespace WebApiProxy.Server.Templates
             #line hidden
             this.Write("\r\n\r\n\t");
             
-            #line 115 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 115 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(method.Name.ToCamelCasing()));
             
             #line default
             #line hidden
             this.Write(": function(");
             
-            #line 115 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 115 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameterList));
             
             #line default
@@ -119,7 +119,7 @@ namespace WebApiProxy.Server.Templates
             this.Write(") {\r\n\t\t var defaults = { fields: [] };\r\n         var settings = $.extend({}, defa" +
                     "ults, options || {});\r\n\t\t var url = ");
             
-            #line 118 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 118 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(url));
             
             #line default
@@ -128,98 +128,98 @@ namespace WebApiProxy.Server.Templates
                     "\"?\" : \"&\";\r\n\t\t\turl += \"fields=\" + settings.fields.join();\r\n\t\t }\r\n\r\n\t\treturn invo" +
                     "ke.call(this, url, \"");
             
-            #line 125 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 125 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(method.Type.ToString().ToLower()));
             
             #line default
             #line hidden
             this.Write("\", \r\n\t\t");
             
-            #line 126 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 126 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  if (method.UrlParameters.Any()) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t{\r\n\t\t\t");
             
-            #line 128 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 128 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  foreach (var parameter in method.UrlParameters) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t");
             
-            #line 129 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 129 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
             
             #line default
             #line hidden
             this.Write(": ");
             
-            #line 129 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 129 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
             
             #line default
             #line hidden
             this.Write(",\r\n\t\t\t");
             
-            #line 130 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 130 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t}\r\n\t\t");
             
-            #line 132 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 132 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("\t\t\t{}\r\n\t\t");
             
-            #line 134 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 134 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t");
             
-            #line 135 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 135 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  if (method.BodyParameter != null) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t, ");
             
-            #line 136 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 136 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(method.BodyParameter.Name));
             
             #line default
             #line hidden
             this.Write(");\r\n\t\t");
             
-            #line 137 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 137 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("\t\t\t);\r\n\t\t");
             
-            #line 139 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 139 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t},\r\n");
             
-            #line 141 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 141 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write(" \r\n};\r\n\t");
             
-            #line 143 "D:\Workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
+            #line 143 "D:\workspace\fst-express\src\modules\webapiproxy\WebApiProxy.Server\Templates\JsProxyTemplate.tt"
  } 
             
             #line default
@@ -250,7 +250,7 @@ namespace WebApiProxy.Server.Templates
         /// <summary>
         /// The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
+        public System.Text.StringBuilder GenerationEnvironment
         {
             get
             {
